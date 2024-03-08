@@ -13,13 +13,19 @@ struct ContentView: View {
     @StateObject private var vm = ContentViewModel()
     
     var body: some View {
-        Map(position: $vm.mapRegion) {
-            UserAnnotation()
+        MapReader { reader in
+            Map(position: $vm.mapRegion) {
+                UserAnnotation()
+            }
+            .tint(.red)
+            .onAppear {
+                vm.checkIfLocationServicesIsEnabled()
+            }
+            .onTapGesture { screenCoord in
+                print(screenCoord)
+            }
         }
-        .tint(.red)
-        .onAppear {
-            vm.checkIfLocationServicesIsEnabled()
-        }
+        
     }
 }
 

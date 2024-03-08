@@ -20,6 +20,8 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
         MKCoordinateRegion(
             center: MapDetails.startingLocation, span: MapDetails.defaultSpan))
     
+    @Published var selectedRegion: MKCoordinateRegion?
+    
     var locationManager: CLLocationManager?
     
     func checkIfLocationServicesIsEnabled() {
