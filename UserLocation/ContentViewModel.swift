@@ -22,6 +22,8 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     
     @Published var selectedRegion: MKCoordinateRegion?
     
+    @Published var selectedCoordinate: CLLocationCoordinate2D?
+    
     var locationManager: CLLocationManager?
     
     func checkIfLocationServicesIsEnabled() {
