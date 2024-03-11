@@ -46,13 +46,17 @@ final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
         case .denied:
             print("Your location is denied")
         case .authorizedAlways, .authorizedWhenInUse:
-            mapRegion = MapCameraPosition.region(
-                MKCoordinateRegion(
-                    center: locationManager.location?.coordinate ?? MapDetails.startingLocation,
-                    span: MapDetails.defaultSpan))
+            setUserLocation()
         @unknown default:
             break
         }
+    }
+    
+    func setUserLocation() {
+        guard let userLocation = locationManager?.location?.coordinate else { return }
+        mapRegion = MapCameraPosition.region(
+            MKCoordinateRegion(
+                center: userLocation, span: MapDetails.defaultSpan))
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

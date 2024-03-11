@@ -21,8 +21,29 @@ struct ContentView: View {
             .onAppear {
                 vm.checkIfLocationServicesIsEnabled()
             }
-            .onTapGesture { screenCoord in
-                print(screenCoord)
+            .overlay {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button {
+                            vm.setUserLocation()
+                        } label: {
+                            Image(systemName: "location")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .padding()
+                        }
+                        .background(Color.white)
+                        .cornerRadius(30)
+                        .shadow(radius: 10)
+                        .padding()
+                    }
+                }
+            }
+            .onMapCameraChange { context in
+                // get center coordinate of the map
+                print(context.camera)
             }
         }
         
